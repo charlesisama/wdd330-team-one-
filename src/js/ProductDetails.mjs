@@ -47,7 +47,7 @@ function productDetailsTemplate(product) {
   document.getElementById("productRetailPrice").textContent = formatPrice(
     product.SuggestedRetailPrice,
   );
-
+//added product discount calculation and display
   const discount = Math.round(
     ((product.SuggestedRetailPrice - product.FinalPrice) /
       product.SuggestedRetailPrice) * 100,
