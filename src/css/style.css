@@ -261,3 +261,31 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.product-detail__prices {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.product-detail__prices p {
+  padding: 0;
+}
+
+.product-detail__retail-price {
+  color: #666;
+  text-decoration: line-through;
+}
+
+.product-detail__sale-price {
+  color: var(--tertiary-color);
+  font-size: var(--large-font);
+  font-weight: bold;
+}
+
+.product-detail__discount {
+  color: var(--secondary-color);
+  font-weight: bold;
+}

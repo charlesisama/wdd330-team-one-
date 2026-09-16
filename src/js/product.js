@@ -1,18 +1,23 @@
 import { setLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+import ProductDetails from "./ProductDetails.mjs";
 
 const dataSource = new ProductData("tents");
+const productId = new URLSearchParams(window.location.search).get("products");
 
-function addProductToCart(product) {
-  setLocalStorage("so-cart", product);
-}
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
-}
+if (productId) {
+  const productDetails = new ProductDetails(productId, dataSource);
+  productDetails.init();
+} else {
+  const addToCartButton = document.getElementById("addToCart");
 
-// add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+  if (addToCartButton?.dataset.id) {
+    addToCartButton.addEventListener("click", async () => {
+      const product = await dataSource.findProductById(addToCartButton.dataset.id);
+      setLocalStorage("so-cart", product);
+    });
+  } else {
+    document.querySelector(".product-detail").innerHTML =
+      "<p>We couldn't find that product. <a href='../index.html'>Browse tents</a></p>";
+  }
+}
