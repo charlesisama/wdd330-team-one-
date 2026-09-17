@@ -2,14 +2,17 @@ import { getLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 
-await loadHeaderFooter();
+async function init() {
+  await loadHeaderFooter();
 
-const cartItems = getLocalStorage("so-cart");
-const htmlElement = document.querySelector(".product-list");
+  const cartItems = getLocalStorage("so-cart");
+  const htmlElement = document.querySelector(".product-list");
 
-const shoppingCart = new ShoppingCart(cartItems, htmlElement);
+  const shoppingCart = new ShoppingCart(cartItems, htmlElement);
+  shoppingCart.init();
+}
 
-shoppingCart.init();
+init();
 
 // function renderCartContents() {
 //   const cartItems = getLocalStorage("so-cart");

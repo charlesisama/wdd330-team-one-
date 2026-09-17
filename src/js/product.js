@@ -3,14 +3,18 @@ import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
-await loadHeaderFooter();
+async function init() {
+  await loadHeaderFooter();
 
-const dataSource = new ProductData("tents");
-const productId = getParam("product");
+  const dataSource = new ProductData("tents");
+  const productId = getParam("product");
 
-const product = new ProductDetails(productId, dataSource);
+  const product = new ProductDetails(productId, dataSource);
 
-product.init();
+  product.init();
+}
+
+init();
 
 // // add listener to Add to Cart button
 // document
