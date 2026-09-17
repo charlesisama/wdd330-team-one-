@@ -5,7 +5,7 @@ import ShoppingCart from "./ShoppingCart.mjs";
 await loadHeaderFooter();
 
 const cartItems = getLocalStorage("so-cart");
-const htmlElement = document.querySelector(".product-list")
+const htmlElement = document.querySelector(".product-list");
 
 const shoppingCart = new ShoppingCart(cartItems, htmlElement);
 
