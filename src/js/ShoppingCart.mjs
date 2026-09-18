@@ -1,7 +1,7 @@
 import { renderListWithTemplate, renderWithTemplate } from "./utils.mjs";
 
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
+    const newItem = `<li class="cart-card divider">
             <a href="#" class="cart-card__image">
                 <img
                 src="${item.Image}"
@@ -24,6 +24,8 @@ function cardTotalTemplate(total) {
     
     return cardTotal;
 };
+    return newItem;
+}
 
 export default class ShoppingCart {
     constructor(dataSource, listElement, totalElement) {
