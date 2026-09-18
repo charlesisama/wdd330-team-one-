@@ -20,15 +20,20 @@ function cartItemTemplate(item) {
 }
 
 export default class ShoppingCart {
-    constructor(dataSource, listElement) {
+    constructor(dataSource, listElement, totalElement) {
         this.dataSource = dataSource;
         this.listElement = listElement;
+        this.totalElement = totalElement;
     }
 
     async init() {
         const cartItems = await this.dataSource;
 
-        this.renderList(cartItems);
+        if(cartItems != null) {
+            this.renderList(cartItems);
+            const total = this.calculateTotal(cartItems);
+            this.renderTotal(total, this.totalElement);
+        }
     }
 
     renderList(items) {
@@ -37,5 +42,16 @@ export default class ShoppingCart {
             this.listElement,
             items
         );
+    }
+
+    calculateTotal(items) {
+        const total = items.reduce((accumulator, item) => {
+            return accumulator + item.FinalPrice;
+        }, 0);
+        return total;
+    }
+
+    renderTotal(total) {
+        this.totalElement.textContent = `Total: $${total.toFixed(2)}`;
     }
 }
