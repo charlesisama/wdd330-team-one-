@@ -290,6 +290,14 @@ button {
   grid-column: 3;
 }
 
+.cart-footer {
+  display: block;
+  margin: 1.5rem auto 0;
+  text-align: center;
+}
+
+.hide {
+  display: none;
 .product-list__header {
   display: flex;
   justify-content: space-between;
