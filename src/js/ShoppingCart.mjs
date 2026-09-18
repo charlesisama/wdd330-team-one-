@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, renderWithTemplate } from "./utils.mjs";
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
@@ -17,7 +17,13 @@ function cartItemTemplate(item) {
         </li>`;
 
   return newItem;
-}
+};
+
+function cardTotalTemplate(total) {
+    const cardTotal = `<h3 class="cart-total" id="cart-total">Total: $${total.toFixed(2)}</h3>`;
+    
+    return cardTotal;
+};
 
 export default class ShoppingCart {
     constructor(dataSource, listElement, totalElement) {
@@ -30,9 +36,10 @@ export default class ShoppingCart {
         const cartItems = await this.dataSource;
 
         if(cartItems != null) {
+            this.totalElement.classList.toggle("hide");
             this.renderList(cartItems);
             const total = this.calculateTotal(cartItems);
-            this.renderTotal(total, this.totalElement);
+            this.renderTotal(total);
         }
     }
 
@@ -52,6 +59,6 @@ export default class ShoppingCart {
     }
 
     renderTotal(total) {
-        this.totalElement.textContent = `Total: $${total.toFixed(2)}`;
+        renderWithTemplate(cardTotalTemplate(total), this.totalElement);
     }
 }

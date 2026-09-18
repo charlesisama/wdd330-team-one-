@@ -7,7 +7,7 @@ async function init() {
 
   const cartItems = getLocalStorage("so-cart");
   const htmlElement = document.querySelector(".product-list");
-  const cartTotalElement = document.getElementById("cart-total");
+  const cartTotalElement = document.getElementById("cart-footer");
 
   const shoppingCart = new ShoppingCart(cartItems, htmlElement, cartTotalElement);
   shoppingCart.init();
