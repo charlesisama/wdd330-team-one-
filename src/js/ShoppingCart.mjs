@@ -1,7 +1,7 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
+    const newItem = `<li class="cart-card divider">
             <a href="#" class="cart-card__image">
                 <img
                 src="${item.Image}"
@@ -16,7 +16,7 @@ function cartItemTemplate(item) {
             <p class="cart-card__price">$${item.FinalPrice}</p>
         </li>`;
 
-  return newItem;
+    return newItem;
 }
 
 export default class ShoppingCart {
