@@ -39,9 +39,24 @@ function productDetailsTemplate(product) {
     productImage.src = product.Images.PrimaryLarge;
     productImage.alt = product.NameWithoutBrand;
 
-    document.getElementById("productPrice").textContent = `$${product.FinalPrice.toFixed(2)}`;
+    const regularPrice = product.SuggestedRetailPrice;
+    const salePrice = product.FinalPrice;
+
+    document.getElementById("productRetailPrice").textContent = formatPrice(regularPrice);
+    document.getElementById("productPrice").textContent = formatPrice(salePrice);
+
+    const discount = Math.round(((regularPrice - salePrice) / regularPrice) * 100);
+    document.getElementById("productDiscount").textContent =
+        discount > 0 ? `Save ${discount}%` : "";
     document.getElementById("productColor").textContent = product.Colors[0].ColorName;
     document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
 
     document.getElementById("addToCart").dataset.id = product.Id;
+}
+
+function formatPrice(price) {
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+    }).format(price);
 }
