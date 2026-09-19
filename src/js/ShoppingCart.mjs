@@ -4,7 +4,7 @@ function cartItemTemplate(item) {
     const newItem = `<li class="cart-card divider">
             <a href="#" class="cart-card__image">
                 <img
-                src="${item.Image}"
+                src="${item.Images.PrimarySmall}"
                 alt="${item.Name}"
                 />
             </a>
@@ -24,8 +24,8 @@ function cardTotalTemplate(total) {
     
     return cardTotal;
 };
-    return newItem;
-}
+//     return newItem;
+// }
 
 export default class ShoppingCart {
     constructor(dataSource, listElement, totalElement) {
