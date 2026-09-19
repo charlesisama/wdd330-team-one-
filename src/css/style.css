@@ -151,9 +151,58 @@ button {
   text-align: center;
 }
 
-.products {
+.products, .categories {
   margin-top: 2rem;
   padding: 1rem;
+}
+
+.product-category-list {
+  display: flex;
+}
+
+.category {
+  list-style: none;
+  flex: 1 1 100%;
+}
+
+.category img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.category a {
+  position: relative;
+  text-decoration: none;
+  color: var(--dark-grey);
+  text-align: center;
+}
+
+.category:hover {
+  transform: scale(1.05);
+  transition: ease-in-out 0.3s;
+}
+
+/* Crear la línea del subrayado */
+.category a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px; /* Grosor de la línea */
+  bottom: -2px; /* Distancia respecto al texto */
+  left: 0;
+  background-color: var(--primary-color); /* Color de la línea */
+  transform: scaleX(0); /* Oculta la línea al inicio */
+  transform-origin: left; /* Define que el origen del movimiento sea la izquierda */
+  transition: transform 0.3s ease-in-out; /* Velocidad y efecto de la animación */
+}
+
+/* Mostrar la línea al hacer hover */
+.category a:hover::after {
+  transform: scaleX(1); /* Expande la línea al 100% */
+}
+
+.list-header {
+  text-transform: capitalize;
 }
 
 .product-list {
