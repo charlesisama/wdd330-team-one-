@@ -9,7 +9,11 @@ async function init() {
   const htmlElement = document.querySelector(".product-list");
   const cartTotalElement = document.getElementById("cart-footer");
 
-  const shoppingCart = new ShoppingCart(cartItems, htmlElement, cartTotalElement);
+  const shoppingCart = new ShoppingCart(
+    cartItems,
+    htmlElement,
+    cartTotalElement,
+  );
   shoppingCart.init();
 }
 
