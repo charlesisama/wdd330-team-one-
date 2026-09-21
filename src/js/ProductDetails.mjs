@@ -22,14 +22,17 @@ export default class ProductDetails {
 
     addProductToCart() {
         const cartItems = getLocalStorage("so-cart") || [];
-        console.log(cartItems);
+        // console.log(cartItems);
+        // Check if the item is in already added and store the item in a variable if so
         const itemAlreadyInCart = cartItems.find(item => item.product.Id === this.productId);
+        // If the item exists, modify the quantity
         if(itemAlreadyInCart) {
             itemAlreadyInCart.quantity ++;
-            console.log("already in cart");
+            // console.log("already in cart");
         } else {
+            // If item doesn't exist, add it along with quantity of "1"
             cartItems.push({"product": this.product, "quantity": 1});
-            console.log("new item added");
+            // console.log("new item added");
         };
 
         setLocalStorage("so-cart", cartItems);
