@@ -45,6 +45,7 @@ function productDetailsTemplate(product) {
     document.getElementById("productRetailPrice").textContent = formatPrice(regularPrice);
     document.getElementById("productPrice").textContent = formatPrice(salePrice);
 
+    // Calculate the discount percentage and display it
     const discount = Math.round(((regularPrice - salePrice) / regularPrice) * 100);
     document.getElementById("productDiscount").textContent =
         discount > 0 ? `Save ${discount}%` : "";
