@@ -285,6 +285,7 @@ button {
 .cart-card__quantity {
   grid-row: 1;
   grid-column: 3;
+  text-align: end;
 }
 
 .cart-card__price {

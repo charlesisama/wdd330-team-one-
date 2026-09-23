@@ -22,8 +22,21 @@ export default class ProductDetails {
 
     addProductToCart() {
         const cartItems = getLocalStorage("so-cart") || [];
-        cartItems.push(this.product);
+        // console.log(cartItems);
+        // Check if the item is in already added and store the item in a variable if so
+        const itemAlreadyInCart = cartItems.find(item => item.product.Id === this.productId);
+        // If the item exists, modify the quantity
+        if(itemAlreadyInCart) {
+            itemAlreadyInCart.quantity ++;
+            // console.log("already in cart");
+        } else {
+            // If item doesn't exist, add it along with quantity of "1"
+            cartItems.push({"product": this.product, "quantity": 1});
+            // console.log("new item added");
+        };
+
         setLocalStorage("so-cart", cartItems);
+        console.log(cartItems);
     }
 
     renderProductDetails() {
@@ -34,6 +47,9 @@ export default class ProductDetails {
 function productDetailsTemplate(product) {
     document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
     document.querySelector("h3").textContent = product.NameWithoutBrand;
+
+    const backToProducts = document.getElementById("backToProducts");
+    backToProducts.href += `${product.Category}`;
 
     const productImage = document.getElementById("productImage");
     productImage.src = product.Images.PrimaryLarge;
