@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -330,6 +330,26 @@ button {
   transform: translateY(-1px);
 }
 
+.checkOut {
+  display: block;
+  align-items: center;
+  justify-self: flex-end;
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  font-weight: 500;
+  color: white;
+  border-radius: 6px;
+  background-color: var(--tertiary-color);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.checkOut:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -352,6 +372,7 @@ footer {
   border-top: 1px solid var(--tertiary-color);
   padding: 1em;
 }
+
 .product-detail__prices {
   grid-column: 1 / -1;
   display: flex;
