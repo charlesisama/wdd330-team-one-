@@ -2,13 +2,13 @@ import { renderListWithTemplate, renderWithTemplate } from "./utils.mjs";
 
 function cartItemTemplate(item) {
     const newItem = `<li class="cart-card divider">
-            <a href="#" class="cart-card__image">
+            <a href="../product_pages/?product=${item.product.Id}" class="cart-card__image">
                 <img
                 src="${item.product.Images.PrimarySmall}"
                 alt="${item.product.Name}"
                 />
             </a>
-            <a href="#">
+            <a href="../product_pages/?product=${item.product.Id}">
                 <h2 class="card__name">${item.product.Name}</h2>
             </a>
             <p class="cart-card__color">${item.product.Colors[0].ColorName}</p>
