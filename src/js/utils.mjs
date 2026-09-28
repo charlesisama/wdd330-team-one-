@@ -41,7 +41,7 @@ export function renderListWithTemplate(template, parentElement, list, position =
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  parentElement.innerHTML = template;
+  parentElement.insertAdjacentHTML("afterbegin", template);
   if (callback) {
     callback(data);
   }
@@ -67,4 +67,22 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
+}
+
+export function alertMessage(message, scroll=true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+
+  alert.innerHTML = `${message} <span class="x-close">X</span>`;
+  alert.addEventListener('click', function(e) {
+    if(e.target.tagName === "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  // add the alert to the top of main
+  const main = document.querySelector('main');
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  if(scroll)
+    window.scrollTo(0,0);
 }

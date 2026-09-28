@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, alertMessage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -97,9 +97,12 @@ export default class CheckoutProcess {
         // call the checkout method in the ExternalServices module and send it the JSON order data.
         try {
             const response = await services.checkout(order);
+            localStorage.removeItem("so-cart");
+            window.location.href = "./success.html";
             console.log(response);
         } catch (err) {
             console.log(err);
+            Object.values(err.message).forEach((msg) => alertMessage(msg));
         }
     }
 }

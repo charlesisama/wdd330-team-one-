@@ -301,7 +301,7 @@ button {
 }
 
 .container {
-  margin: 1rem auto;
+  margin: 0.5rem auto;
 }
 
 .cart-actions {
@@ -319,7 +319,7 @@ button {
   font-size: var(--large-font);
   background-color: var(--primary-color);
   color: var(--dark-grey);
-  margin: 0.5rem 1rem;
+  margin: 0.5rem 0.5rem;
   padding: 1rem;
   border-radius: 0.5rem;
   transform: scale(1);
@@ -467,6 +467,65 @@ legend {
   }
 }
 
+.success-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--font-base);
+  color: var(--dark-grey);
+  background-color: #ffffff;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+}
+
+.success-title {
+  font-family: var(--font-base);
+  color: var(--tertiary-color);
+  font-size: calc(var(--font-base) * 1.8);
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.success-message {
+  color: var(--dark-grey);
+  font-size: var(--font-base);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+/* ******** ALERT ********** */
+.alert {
+  display: flex;
+  justify-content: space-between;
+  color: var(--tertiary-color);
+  font-family: var(--font-body);
+  font-weight: 600;
+  margin: 0.5rem 1.5rem;
+  border-radius: 0.2rem;
+  border: 2px solid var(--tertiary-color);
+  box-shadow: -2px 2px 10px var(--light-grey);
+  text-align: center;
+  padding: 0.7rem;
+}
+
+.x-close:hover,
+.x-close:focus {
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.alert:hover,
+.alert:focus {
+  border-color: var(--primary-color);
+  transition: 0.1s ease-in-out;
+}
+
+/* .alert.good {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+} */
+
 @media screen and (min-width: 800px) {
   .form-title {
     grid-row: 1;
@@ -498,6 +557,10 @@ legend {
   }
 }
 
+/* ****************************
+** Media Screen **
+**************************** */
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -517,6 +580,11 @@ legend {
   .cart-actions {
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .alert {
+    margin: 0.5rem auto;
+    max-width: 700px;
   }
 }
 
