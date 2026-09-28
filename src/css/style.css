@@ -330,6 +330,26 @@ button {
   transform: translateY(-1px);
 }
 
+.checkOut {
+  display: block;
+  align-items: center;
+  justify-self: flex-end;
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  font-weight: 500;
+  color: white;
+  border-radius: 6px;
+  background-color: var(--tertiary-color);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.checkOut:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -352,6 +372,7 @@ footer {
   border-top: 1px solid var(--tertiary-color);
   padding: 1em;
 }
+
 .product-detail__prices {
   grid-column: 1 / -1;
   display: flex;
@@ -378,4 +399,200 @@ footer {
 .product-detail__discount {
   color: var(--secondary-color);
   font-weight: bold;
+}
+
+/* ==========================================================================
+   Checkout Page Styles
+   ========================================================================== */
+
+main.checkout {
+  padding: 1.5rem 1rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+main.checkout h2 {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  color: var(--dark-grey);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Form Layout & Fieldsets */
+.checkout-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.checkout-form fieldset {
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  background-color: #fafafa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.checkout-form legend {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  color: var(--tertiary-color);
+  padding: 0 0.5rem;
+  font-weight: bold;
+}
+
+/* Input Fields & Labels */
+.checkout__name,
+.checkout__address,
+.checkout__payment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkout-form label {
+  font-size: var(--small-font);
+  font-weight: bold;
+  color: var(--dark-grey);
+  margin-bottom: -0.25rem;
+}
+
+.checkout-form input[type="text"] {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  background-color: #ffffff;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.checkout-form input[type="text"]:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(82, 91, 15, 0.2);
+}
+
+/* Order Summary Box */
+.checkout-summary {
+  background-color: #f4f5f0;
+  border: 1px solid var(--secondary-color);
+}
+
+.order__summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 0.6rem;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+}
+
+.order__summary div:nth-child(odd) {
+  color: var(--dark-grey);
+}
+
+.order__summary div:nth-child(even) {
+  font-weight: bold;
+  text-align: right;
+  color: var(--dark-grey);
+}
+
+.order__summary div:nth-last-child(1),
+.order__summary div:nth-last-child(2) {
+  font-size: var(--large-font);
+  color: var(--tertiary-color);
+  font-weight: bold;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--light-grey);
+}
+
+/* Submit Button */
+#checkoutSubmit {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: var(--secondary-color);
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+  margin-top: 0.5rem;
+}
+
+#checkoutSubmit:hover {
+  background-color: var(--tertiary-color);
+  transform: translateY(-1px);
+}
+
+#checkoutSubmit:active {
+  transform: translateY(0);
+}
+
+/* Responsive Grid for Desktop (2-column layout) */
+@media screen and (min-width: 768px) {
+  .checkout-form form {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  /* Left column takes inputs */
+  .checkout-form fieldset:nth-of-type(1),
+  .checkout-form fieldset:nth-of-type(2) {
+    grid-column: 1;
+  }
+
+  /* Right column holds summary and submit button */
+  .checkout-summary {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  #checkoutSubmit {
+    grid-column: 2;
+  }
+
+  /* Internal Form Grid Spacing */
+  .checkout__name {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+  }
+
+  .checkout__address {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+  }
+
+  .checkout__address label[for="street"],
+  .checkout__address input#street {
+    grid-column: 1 / -1;
+  }
+
+  .checkout__payment {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+  }
+
+  .checkout__payment label[for="cardNumber"],
+  .checkout__payment input#cardNumber {
+    grid-column: 1 / -1;
+  }
 }
