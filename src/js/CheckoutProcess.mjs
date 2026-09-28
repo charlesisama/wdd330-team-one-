@@ -1,5 +1,7 @@
-import { getLocalStorage } from "./utils.mjs";
+// CheckoutProcess.mjs
+import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
+
 
 const services = new ExternalServices();
 
@@ -96,19 +98,52 @@ export default class CheckoutProcess {
 
   async checkout() {
     const formElement = document.forms["checkout"];
+    removeAllAlerts();
+
+    // 1. Validate form fields
+    if (!formElement.checkValidity()) {
+      formElement.reportValidity();
+      alertMessage("Please fill in all required fields with valid input.");
+      return;
+    }
+
+    // 2. Validate empty cart
+    if (!this.list || this.list.length === 0) {
+      alertMessage("Your shopping cart is empty.");
+      return;
+    }
+
     const order = formDataToJSON(formElement);
 
+    // Ensure hidden orderDate is set
     order.orderDate = new Date().toISOString();
-    order.orderTotal = this.orderTotal;
-    order.tax = this.tax;
-    order.shipping = this.shipping;
+    order.orderTotal = this.orderTotal.toFixed(2);
+    order.tax = this.tax.toFixed(2);
+    order.shipping = this.shipping.toFixed(2);
     order.items = packageItems(this.list);
 
     try {
       const response = await services.checkout(order);
-      console.log(response);
+
+      // Clear cart on successful order placement
+      setLocalStorage(this.key, []);
+
+      // Redirect to a success / confirmation page (or show success banner)
+      alertMessage("Order placed successfully! Redirecting...", true, 0);
+      setTimeout(() => {
+        window.location.href = "../checkout/success.html";
+      }, 2000);
+
     } catch (err) {
-      console.log(err);
+      // 3. Catch and display server validation errors
+      if (err.message && typeof err.message === "object") {
+        for (const message in err.message) {
+          alertMessage(`${message}: ${err.message[message]}`);
+        }
+      } else {
+        alertMessage("There was an error processing your order. Please try again.");
+      }
+      console.error("Checkout Error:", err);
     }
   }
 }

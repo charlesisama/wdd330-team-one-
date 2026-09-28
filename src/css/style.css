@@ -251,53 +251,220 @@ button {
   color: var(--secondary-color);
 }
 
-/* Start cart list card styles */
+/* Refined Cart Card */
 .cart-card {
+  position: relative;
   display: grid;
-  grid-template-columns: 25% auto 15%;
-  font-size: var(--small-font);
-  /* max-height: 120px; */
+  grid-template-columns: 110px 1fr auto;
+  grid-template-rows: auto auto;
   align-items: center;
-  margin: auto;
+  column-gap: 1.25rem;
+  row-gap: 0.25rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 1.25rem 3.5rem 1.25rem 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
+.cart-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Product Image Frame */
 .cart-card__image {
-  grid-row: 1/3;
   grid-column: 1;
-  margin: auto;
+  grid-row: 1 / span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  border-radius: 6px;
+  padding: 0.5rem;
+  height: 90px;
+  width: 90px;
+  margin: 0;
 }
 
-.cart-card p {
-  margin-top: 0;
+.cart-card__image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
 
+/* Product Info */
 .cart-card .card__name {
-  grid-row: 1;
   grid-column: 2;
-  margin: 1rem 0.5rem 0;
+  grid-row: 1;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--dark-grey);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cart-card a {
+  text-decoration: none;
+}
+
+.cart-card a:hover .card__name {
+  color: var(--tertiary-color);
 }
 
 .cart-card__color {
-  grid-row: 2;
   grid-column: 2;
+  grid-row: 2;
+  font-size: var(--small-font);
+  color: #666;
+  margin: 0;
+  padding: 0;
 }
 
+/* Quantity & Price */
 .cart-card__quantity {
-  grid-row: 1;
   grid-column: 3;
-  text-align: end;
+  grid-row: 1;
+  font-size: var(--small-font);
+  color: var(--dark-grey);
+  text-align: right;
+  margin: 0;
+  padding: 0;
 }
 
 .cart-card__price {
-  grid-row: 2;
-
   grid-column: 3;
+  grid-row: 2;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  text-align: right;
+  margin: 0;
+  padding: 0;
 }
 
-.cart-footer {
-  display: block;
-  margin: 1.5rem auto 0;
+/* Remove 'X' Button */
+.cart-card__remove {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #999;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+  user-select: none;
+}
+
+.cart-card__remove:hover {
+  color: #d9534f;
+  background-color: #f8d7da;
+}
+
+/* Empty Cart State */
+.empty-cart {
   text-align: center;
+  padding: 3rem 1rem;
+  font-size: 1.1rem;
+  color: var(--dark-grey);
+  background-color: #fafafa;
+  border: 1px dashed var(--light-grey);
+  border-radius: 8px;
+}
+
+/* Cart Summary Footer */
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background-color: #f4f5f0;
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+}
+
+.cart-total {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--dark-grey);
+  margin: 0;
+}
+
+/* Checkout Button */
+.checkOut {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-headline);
+  font-size: 1.2rem;
+  letter-spacing: 0.03em;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.checkOut:hover {
+  background-color: var(--tertiary-color);
+  transform: translateY(-1px);
+}
+
+.checkOut:active {
+  transform: translateY(0);
+}
+
+/* Mobile Responsiveness for Cart Cards */
+@media screen and (max-width: 600px) {
+  .cart-card {
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto auto;
+    padding: 1rem 2.5rem 1rem 1rem;
+  }
+
+  .cart-card__image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .cart-card__quantity {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: left;
+  }
+
+  .cart-card__price {
+    grid-column: 2;
+    grid-row: 3;
+    text-align: left;
+  }
+
+  .cart-footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
 }
 
 .hide {
@@ -595,4 +762,64 @@ main.checkout h2 {
   .checkout__payment input#cardNumber {
     grid-column: 1 / -1;
   }
+}
+
+/* Alert Message Banners */
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.2rem;
+  margin-bottom: 1rem;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.close-alert {
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  margin-left: 1rem;
+}
+
+.close-alert:hover {
+  color: #000;
+}
+
+/* Invalid Input Style */
+.checkout-form input:invalid:focus {
+  border-color: #d9534f;
+  box-shadow: 0 0 0 2px rgba(217, 83, 79, 0.2);
+}
+
+/* Highlight invalid input fields */
+.checkout-form input:required:invalid:touched,
+.checkout-form input.invalid {
+  border-color: #d9534f;
+  background-color: #fff8f8;
+}
+
+/* Success message banner styling */
+.alert.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.checkout-success {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.checkout-success h2 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.checkout-success p {
+  margin-bottom: 1.5rem;
 }
