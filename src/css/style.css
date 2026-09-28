@@ -319,15 +319,15 @@ button {
   font-size: var(--large-font);
   background-color: var(--primary-color);
   color: var(--dark-grey);
-  margin: .5rem 1rem;
+  margin: 0.5rem 1rem;
   padding: 1rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   transform: scale(1);
 }
 
 .primary-btn:hover {
   transform: scale(1.02);
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
   box-shadow: 0 3px 5px var(--tertiary-color);
 }
 
@@ -368,7 +368,7 @@ button {
 
 /* Form Layout */
 .form-title {
-  margin: 1.5rem 1.5rem .2rem;
+  margin: 1.5rem 1.5rem 0.2rem;
 }
 
 .checkout-container {
@@ -555,7 +555,7 @@ footer {
 
 .product-detail__add button:hover {
   transform: scale(1.05);
-  transition: .1s ease-in-out;
+  transition: 0.1s ease-in-out;
   box-shadow: 0 3px 5px var(--secondary-color);
 }
 
