@@ -68,3 +68,34 @@ export async function loadHeaderFooter() {
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
 }
+
+
+// utils.mjs
+
+// Displays alert messages at the top of the main container
+export function alertMessage(message, scroll = true, duration = 5000) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<span>${message}</span><span class="close-alert">&times;</span>`;
+
+  alert.querySelector(".close-alert").addEventListener("click", () => {
+    alert.remove();
+  });
+
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  if (scroll) window.scrollTo(0, 0);
+
+  if (duration > 0) {
+    setTimeout(() => {
+      alert.remove();
+    }, duration);
+  }
+}
+
+// Clears existing alerts
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => alert.remove());
+}

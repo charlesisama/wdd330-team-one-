@@ -34,6 +34,14 @@ export default class ExternalServices {
       },
       body: JSON.stringify(payload),
     };
-    return await fetch(`${baseURL}checkout/`, options).then(convertToJson);
+
+    const response = await fetch(baseURL + "checkout", options);
+    const data = await response.json();
+
+    if (response.ok) {
+      return data;
+    } else {
+      throw { name: "servicesError", message: data };
+    }
   }
 }

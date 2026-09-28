@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, setLocalStorage } from "./utils.mjs";
 
 function cartItemTemplate(item) {
     // Support both wrapped { product, quantity } and flat product objects
@@ -6,8 +6,10 @@ function cartItemTemplate(item) {
     const quantity = item.quantity || 1;
     const imageSrc = product.Images?.PrimarySmall || product.Image || "";
     const colorName = product.Colors?.[0]?.ColorName || "";
+    const id = product.Id || item.Id || "";
 
     return `<li class="cart-card divider">
+    <span class="cart-card__remove" data-id="${id}">&times;</span>
     <a href="#" class="cart-card__image">
       <img src="${imageSrc}" alt="${product.Name}" />
     </a>
@@ -29,16 +31,18 @@ export default class ShoppingCart {
         this.dataSource = dataSource;
         this.listElement = listElement;
         this.totalElement = totalElement;
+        this.key = "so-cart";
     }
 
     async init() {
-        const cartItems = await this.dataSource;
+        const cartItems = this.dataSource;
 
         if (Array.isArray(cartItems) && cartItems.length > 0) {
             this.totalElement.classList.remove("hide");
             this.renderList(cartItems);
             const total = this.calculateTotal(cartItems);
             this.renderTotal(total);
+            this.attachRemoveListeners();
         } else {
             this.totalElement.classList.add("hide");
             if (this.listElement) {
@@ -51,7 +55,9 @@ export default class ShoppingCart {
         renderListWithTemplate(
             cartItemTemplate,
             this.listElement,
-            items
+            items,
+            "afterbegin",
+            true
         );
     }
 
@@ -65,5 +71,32 @@ export default class ShoppingCart {
 
     renderTotal(total) {
         this.totalElement.innerHTML = cardTotalTemplate(total);
+    }
+
+    attachRemoveListeners() {
+        const removeButtons = this.listElement.querySelectorAll(".cart-card__remove");
+        removeButtons.forEach((button) => {
+            button.addEventListener("click", (event) => {
+                const idToRemove = event.target.getAttribute("data-id");
+                this.removeItem(idToRemove);
+            });
+        });
+    }
+
+    removeItem(id) {
+        let cartItems = this.dataSource || [];
+
+        // Find index of first item matching ID
+        const index = cartItems.findIndex((item) => {
+            const productId = item.Id || item.product?.Id;
+            return productId === id;
+        });
+
+        if (index !== -1) {
+            cartItems.splice(index, 1);
+            setLocalStorage(this.key, cartItems);
+            this.dataSource = cartItems; // Update local reference
+            this.init(); // Re-render cart and recalculate totals
+        }
     }
 }
