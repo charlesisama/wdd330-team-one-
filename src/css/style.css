@@ -331,6 +331,11 @@ button {
   box-shadow: 0 3px 5px var(--tertiary-color);
 }
 
+.primary-btn:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
 .hide {
   display: none;
 }
@@ -548,13 +553,13 @@ footer {
   font-weight: bold;
 }
 
-.product-detail__add:hover {
+.product-detail__add button:hover {
   transform: scale(1.05);
   transition: .1s ease-in-out;
   box-shadow: 0 3px 5px var(--secondary-color);
 }
 
-.product-detail__add:active {
+.product-detail__add button:active {
   transform: scale(0.95);
   box-shadow: none;
 }
