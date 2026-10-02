@@ -66,9 +66,17 @@ export async function loadHeaderFooter() {
   const footerElement = document.getElementById("main-footer");
 
   renderWithTemplate(header, headerElement);
-  renderWithTemplate(footer, footerElement);
+  renderWithTemplate(footer, footerElement);  
+  showCartCount();
 }
 
+export function showCartCount() {
+  const cartCount = document.querySelector(".cart-count");
+  let cart = getLocalStorage("so-cart") || [];
+  if (!Array.isArray(cart)) cart = [];
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  cartCount.textContent = totalItems;
+}
 
 // utils.mjs
 

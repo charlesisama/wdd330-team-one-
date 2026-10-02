@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, showCartCount } from "./utils.mjs";
 
 export default class ProductDetails {
 
@@ -29,6 +29,16 @@ export default class ProductDetails {
 
                 // 2. Display non-blocking toast notification
                 showToast(`${this.product.NameWithoutBrand || "Product"} added to cart!`);
+
+                // 3. Show cart icon animation and count update
+                const cartIcon = document.querySelector(".cart");
+                if (cartIcon) {
+                    cartIcon.classList.add("bounce");
+                    setTimeout(() => {
+                        cartIcon.classList.remove("bounce");
+                    }, 900);
+                }
+                showCartCount();
             });
         }
     }

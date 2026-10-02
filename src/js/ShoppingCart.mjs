@@ -1,4 +1,4 @@
-import { renderListWithTemplate, setLocalStorage } from "./utils.mjs";
+import { renderListWithTemplate, setLocalStorage, showCartCount } from "./utils.mjs";
 
 function cartItemTemplate(item) {
     // Support both wrapped { product, quantity } and flat product objects
@@ -10,10 +10,10 @@ function cartItemTemplate(item) {
 
     return `<li class="cart-card divider">
     <span class="cart-card__remove" data-id="${id}">&times;</span>
-    <a href="#" class="cart-card__image">
+    <a href="/product_pages/?product=${product.Id}" class="cart-card__image">
       <img src="${imageSrc}" alt="${product.Name}" />
     </a>
-    <a href="#">
+    <a href="/product_pages/?product=${product.Id}">
       <h2 class="card__name">${product.Name}</h2>
     </a>
     <p class="cart-card__color">${colorName}</p>
@@ -96,6 +96,7 @@ export default class ShoppingCart {
             cartItems.splice(index, 1);
             setLocalStorage(this.key, cartItems);
             this.dataSource = cartItems; // Update local reference
+            showCartCount(); // Update cart count in header
             this.init(); // Re-render cart and recalculate totals
         }
     }
